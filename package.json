@@ -1,25 +1,36 @@
 {
-  "name": "whop-code",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.1.4"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0"
-  }
+	"name": "whop-code",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"whop": "whop-proxy"
+	},
+	"dependencies": {
+		"@frosted-ui/icons": "0.0.1-canary.11",
+		"@monaco-editor/react": "^4.6.0",
+		"@tanstack/react-query": "^5.29.0",
+		"@whop-apps/sdk": "0.0.1-canary.55",
+		"@whop-apps/storage": "0.0.1-canary.55",
+		"clsx": "^2.1.0",
+		"frosted-ui": "0.0.1-canary.27",
+		"next": "14.1.4",
+		"react": "^18",
+		"react-dom": "^18",
+		"sonner": "^1.4.41",
+		"tailwind-merge": "^2.2.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.6.4",
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"autoprefixer": "^10.0.1",
+		"postcss": "^8",
+		"tailwindcss": "^3.3.0",
+		"typescript": "^5"
+	}
 }
