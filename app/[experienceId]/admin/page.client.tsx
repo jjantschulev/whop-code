@@ -17,7 +17,7 @@ import {
 	TextFieldInput,
 	useThemeContext,
 } from "frosted-ui";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const editorOptions: EditorProps["options"] = {
 	minimap: { enabled: false },
@@ -49,7 +49,28 @@ function SaveButton() {
 
 	const { isPending, mutate } = useMutation({
 		mutationFn: save,
+		onSuccess: () => {
+			if (!("BroadcastChannel" in window)) return;
+			const channel = new BroadcastChannel("whop-code-update");
+			channel.postMessage("refresh");
+		},
 	});
+
+	useEffect(() => {
+		// add keyboard shortcut for save listeners to window
+		const listener = (e: KeyboardEvent) => {
+			if (e.key === "s" && (e.ctrlKey || e.metaKey)) {
+				e.preventDefault();
+				mutate();
+			}
+		};
+
+		window.addEventListener("keydown", listener);
+		return () => {
+			window.removeEventListener("keydown", listener);
+		};
+	}, [mutate]);
+
 	return (
 		<div className={cn("absolute right-8 bottom-8 transition", { "translate-y-16": !hasChanges })}>
 			<Button variant="classic" onClick={() => mutate()} color="success" loading={isPending}>
