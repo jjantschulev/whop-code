@@ -17,7 +17,7 @@ export async function createBucket(experienceId: string) {
 	try {
 		const experience = await getExperience(experienceId);
 
-		if (!hasAccess({ to: authorizedUserOn(experience.company_id), headers })) {
+		if (!(await hasAccess({ to: authorizedUserOn(experience.company_id), headers }))) {
 			throw new StandardError(401, "Permission denied, not an admin of the company.");
 		}
 

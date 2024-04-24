@@ -10,7 +10,8 @@ export default async function Home({ params }: { params: { experienceId: string 
 	const experience = await getExperience(params.experienceId);
 	const bucket = await getBucket(params.experienceId);
 
-	if (!hasAccess({ to: authorizedUserOn(experience.company_id) })) return <div>not an admin</div>;
+	if (!(await hasAccess({ to: authorizedUserOn(experience.company_id) })))
+		return <div>not an admin</div>;
 
 	if (!bucket) {
 		return (
