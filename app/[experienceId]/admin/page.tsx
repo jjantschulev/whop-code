@@ -4,13 +4,14 @@ import { getBucket } from "@/lib/data/get-bucket";
 import { getBucketFiles } from "@/lib/data/get-bucket-files";
 import { getExperience } from "@/lib/data/get-experience";
 import { authorizedUserOn, hasAccess } from "@whop-apps/sdk";
+import { headers } from "next/headers";
 import ClientPage from "./page.client";
 
 export default async function Home({ params }: { params: { experienceId: string } }) {
 	const experience = await getExperience(params.experienceId);
 	const bucket = await getBucket(params.experienceId);
 
-	if (!(await hasAccess({ to: authorizedUserOn(experience.company_id) })))
+	if (!(await hasAccess({ to: authorizedUserOn(experience.company_id), headers })))
 		return <div>not an admin</div>;
 
 	if (!bucket) {
